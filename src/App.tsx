@@ -1,9 +1,19 @@
+import styled from "styled-components";
+import Button from "./components/Button";
+import Input from "./components/Input";
+
 function App() {
   return (
-    <>
-      <p>hello world</p>
-    </>
-  )
+    <Wrapper>
+      <Button />
+      <Input />
+    </Wrapper>
+  );
 }
 
-export default App
+const Wrapper = styled.div`
+  background-color: grey;
+  height: 100vh;
+`;
+
+export default App;
