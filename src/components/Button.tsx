@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
-const Button = () => {
+type ButtonProps = {
+  onClick: () => void;
+};
+
+const Button: React.FC<ButtonProps> = ({ onClick }) => {
   return (
-    <ButtonWrapper>
+    <ButtonWrapper onClick={onClick}>
       <StyledText>Send my letter!</StyledText>
     </ButtonWrapper>
   );
