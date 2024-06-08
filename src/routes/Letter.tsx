@@ -19,7 +19,10 @@ const Letter = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const q = query(collection(db, "messages"), where("id", "==", letterId));
+      const q = query(
+        collection(db, "messages"),
+        where("messageId", "==", letterId)
+      );
 
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
@@ -70,6 +73,7 @@ const fadeInHorizontal = keyframes`
 
 const LetterHeading = styled.h1`
   margin: 0 0 24px 0;
+  padding: 0 32px;
   cursor: default;
   color: white;
   text-shadow: black 1px 0 10px;
@@ -91,17 +95,18 @@ const floatUpAnimation = keyframes`
 const NoteWrapper = styled.div`
   display: grid;
   grid-template: 1fr;
-  height: 70vh;
+  width: min(50vw, 60vh);
   animation: ${floatUpAnimation} 1.5s ease;
 `;
 
 const NoteImg = styled.img`
   grid-area: 1/1;
-  height: 100%;
+  width: 100%;
 `;
 
 const Message = styled.p`
   grid-area: 1/1;
+  max-width: 100%;
   margin: 24px;
 `;
 
