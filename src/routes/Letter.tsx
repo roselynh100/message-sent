@@ -33,10 +33,12 @@ const Letter = () => {
   return (
     <Section>
       <LetterHeading>You&apos;ve received a letter!</LetterHeading>
-      <div>
-        <NoteImg src={Note} />
-        {letter && <p>{letter.message}</p>}
-      </div>
+      {letter && (
+        <NoteWrapper>
+          <NoteImg src={Note} />
+          <Message>{letter.message}</Message>
+        </NoteWrapper>
+      )}
     </Section>
   );
 };
@@ -47,14 +49,27 @@ const Section = styled.div`
   align-items: center;
 `;
 
+// TODO: cool animation for this heading
 const LetterHeading = styled.h2`
   margin: 0;
   padding: 0;
   cursor: default;
 `;
 
-const NoteImg = styled.img`
+const NoteWrapper = styled.div`
+  display: grid;
+  grid-template: 1fr;
   height: 70vh;
+`;
+
+const NoteImg = styled.img`
+  grid-area: 1/1;
+  height: 100%;
+`;
+
+const Message = styled.p`
+  grid-area: 1/1;
+  margin: 24px;
 `;
 
 export default Letter;
