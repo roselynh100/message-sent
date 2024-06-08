@@ -6,9 +6,12 @@ import {
   where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Note } from "../assets";
 import styled, { keyframes } from "styled-components";
+import Button from "../components/Button";
+import { theme } from "../theme";
+import Spacer from "../components/Spacer";
 
 const Letter = () => {
   const db = getFirestore();
@@ -16,6 +19,7 @@ const Letter = () => {
   const letterId = location.pathname.split("/")[1];
 
   const [letter, setLetter] = useState<any>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -36,12 +40,17 @@ const Letter = () => {
   return (
     <Section>
       <LetterHeading>You&apos;ve received a letter!</LetterHeading>
+      <Spacer height={24} />
       {letter && (
         <NoteWrapper>
           <NoteImg src={Note} />
           <Message>{letter.message}</Message>
         </NoteWrapper>
       )}
+      <Spacer height={24} />
+      <Button onClick={() => navigate("/")}>
+        Want to write your own letter?
+      </Button>
     </Section>
   );
 };
@@ -72,7 +81,7 @@ const fadeInHorizontal = keyframes`
 `;
 
 const LetterHeading = styled.h1`
-  margin: 0 0 24px 0;
+  margin: 0;
   padding: 0 32px;
   cursor: default;
   color: white;

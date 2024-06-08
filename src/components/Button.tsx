@@ -1,18 +1,20 @@
 import styled from "styled-components";
 import { theme } from "../theme";
+import { ReactNode } from "react";
 
 type ButtonProps = {
   onClick: () => void;
   disabled?: boolean;
+  children: ReactNode;
 };
 
-const Button: React.FC<ButtonProps> = ({ onClick, disabled }) => {
+const Button: React.FC<ButtonProps> = ({ onClick, disabled, children }) => {
   return (
     <ButtonWrapper
       onClick={onClick}
       disabled={disabled !== undefined ? disabled : false}
     >
-      <StyledText>Send my letter!</StyledText>
+      <StyledText>{children}</StyledText>
     </ButtonWrapper>
   );
 };
@@ -35,12 +37,15 @@ const ButtonWrapper = styled.button`
   &:hover {
     transform: translateY(-3px);
     box-shadow: 6px 6px ${theme.colors.darkPink};
+    color: ${theme.colors.grey}CC;
   }
 
   &:disabled {
     cursor: not-allowed;
     transform: translateY(0);
     box-shadow: 0 0;
+    color: ${theme.colors.grey};
+    opacity: 0.8;
   }
 `;
 
