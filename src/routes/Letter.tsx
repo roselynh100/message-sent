@@ -7,6 +7,8 @@ import {
 } from "firebase/firestore";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { Note } from "../assets";
+import styled from "styled-components";
 
 const Letter = () => {
   const db = getFirestore();
@@ -27,6 +29,7 @@ const Letter = () => {
 
   return (
     <div>
+      <NoteImg src={Note} />
       <button onClick={() => fetchData()}>hi</button>
       <button onClick={() => console.log(letter)}>owo</button>
     </div>
@@ -34,3 +37,7 @@ const Letter = () => {
 };
 
 export default Letter;
+
+const NoteImg = styled.img`
+  height: 70vh;
+`;

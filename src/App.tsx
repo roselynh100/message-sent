@@ -4,25 +4,34 @@ import "./firebaseConfig";
 
 import Landing from "./routes/Landing";
 import Letter from "./routes/Letter";
+import { PixelBackground } from "./assets";
 
 function App() {
   return (
-    <Wrapper>
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<Landing />} />
-          <Route path="/:letterId" element={<Letter />} />
-          <Route path="*" element={<p>nothing here</p>} />
-        </Routes>
-      </BrowserRouter>
-    </Wrapper>
+    <Background>
+      <Wrapper>
+        <BrowserRouter>
+          <Routes>
+            <Route index element={<Landing />} />
+            <Route path="/:letterId" element={<Letter />} />
+            <Route path="*" element={<p>nothing here</p>} />
+          </Routes>
+        </BrowserRouter>
+      </Wrapper>
+    </Background>
   );
 }
 
-const Wrapper = styled.div`
-  background-color: grey;
+const Background = styled.div`
+  background: lightblue url("${PixelBackground}") no-repeat fixed center;
+  background-size: cover;
   height: 100vh;
+`;
+
+const Wrapper = styled.div`
   padding: 128px 64px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export default App;
