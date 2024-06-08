@@ -5,7 +5,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Note } from "../assets";
 import styled from "styled-components";
@@ -17,27 +17,44 @@ const Letter = () => {
 
   const [letter, setLetter] = useState<any>();
 
-  const fetchData = async () => {
-    const q = query(collection(db, "messages"), where("id", "==", letterId));
+  useEffect(() => {
+    async function fetchData() {
+      const q = query(collection(db, "messages"), where("id", "==", letterId));
 
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
-      setLetter(doc.data());
-    });
-  };
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+        setLetter(doc.data());
+      });
+    }
+    fetchData();
+  }, []);
 
   return (
-    <div>
-      <NoteImg src={Note} />
-      <button onClick={() => fetchData()}>hi</button>
-      <button onClick={() => console.log(letter)}>owo</button>
-    </div>
+    <Section>
+      <LetterHeading>You&apos;ve received a letter!</LetterHeading>
+      <div>
+        <NoteImg src={Note} />
+        {letter && <p>{letter.message}</p>}
+      </div>
+    </Section>
   );
 };
 
-export default Letter;
+const Section = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const LetterHeading = styled.h2`
+  margin: 0;
+  padding: 0;
+  cursor: default;
+`;
 
 const NoteImg = styled.img`
   height: 70vh;
 `;
+
+export default Letter;

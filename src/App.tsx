@@ -26,12 +26,11 @@ const Background = styled.div`
   background: lightblue url("${PixelBackground}") no-repeat fixed center;
   background-size: cover;
   height: 100vh;
+  overflow-y: scroll;
 `;
 
 const Wrapper = styled.div`
   padding: 128px 64px;
-  display: flex;
-  flex-direction: column;
 `;
 
 export default App;
