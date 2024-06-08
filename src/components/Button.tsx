@@ -1,12 +1,17 @@
 import styled from "styled-components";
+import { theme } from "../theme";
 
 type ButtonProps = {
   onClick: () => void;
+  disabled?: boolean;
 };
 
-const Button: React.FC<ButtonProps> = ({ onClick }) => {
+const Button: React.FC<ButtonProps> = ({ onClick, disabled }) => {
   return (
-    <ButtonWrapper onClick={onClick}>
+    <ButtonWrapper
+      onClick={onClick}
+      disabled={disabled !== undefined ? disabled : false}
+    >
       <StyledText>Send my letter!</StyledText>
     </ButtonWrapper>
   );
@@ -14,14 +19,28 @@ const Button: React.FC<ButtonProps> = ({ onClick }) => {
 
 const ButtonWrapper = styled.button`
   border-radius: 12px;
-  background-color: pink;
-  padding: 12px 18px;
-  border: none;
-  color: white;
+  border: 3px solid ${theme.colors.darkPink};
+  background: linear-gradient(
+    to right,
+    ${theme.colors.pink},
+    ${theme.colors.yellow}
+  );
+  color: ${theme.colors.grey};
+  padding: 18px;
+  font-size: 16px;
+  transition: all 250ms;
+  user-select: none;
+  cursor: pointer;
 
   &:hover {
-    cursor: pointer;
-    color: red;
+    transform: translateY(-3px);
+    box-shadow: 6px 6px ${theme.colors.darkPink};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    transform: translateY(0);
+    box-shadow: 0 0;
   }
 `;
 

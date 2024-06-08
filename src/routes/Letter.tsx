@@ -108,6 +108,8 @@ const Message = styled.p`
   grid-area: 1/1;
   max-width: 100%;
   margin: 24px;
+  font-size: 18px;
+  white-space: pre-line;
 `;
 
 export default Letter;

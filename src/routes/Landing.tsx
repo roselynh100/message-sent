@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import StyledInput from "../components/StyledInput";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 const Landing = () => {
   const db = getFirestore();
@@ -24,16 +25,26 @@ const Landing = () => {
   };
 
   return (
-    <>
+    <Section>
+      <Heading>Do you have a letter to send?</Heading>
       <StyledInput
         rows={10}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Write your letter here!"
       />
-      <Button onClick={() => handleSubmit()} />
-    </>
+      <Button onClick={() => handleSubmit()} disabled={message.length < 1} />
+    </Section>
   );
 };
+
+const Section = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Heading = styled.h1`
+  margin: 0;
+`;
 
 export default Landing;
