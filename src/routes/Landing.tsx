@@ -6,16 +6,26 @@ import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Spacer from "../components/Spacer";
+import ColourSelect from "../components/ColourSelect";
+import { ENVELOPE_COLOURS } from "../constants";
 
 const Landing = () => {
   const db = getFirestore();
-  const [message, setMessage] = useState("");
+
+  const [message, setMessage] = useState<string>("");
+  const [envelopeColour, setEnvelopeColour] = useState<{
+    fill: string;
+    stroke: string;
+  }>({ fill: "", stroke: "" });
+
   const navigate = useNavigate();
 
   const saveData = async (uuid: string) => {
     await addDoc(collection(db, "messages"), {
       messageId: uuid,
       message,
+      fill: envelopeColour.fill,
+      stroke: envelopeColour.stroke,
     });
   };
 
@@ -35,6 +45,20 @@ const Landing = () => {
         placeholder="Write your letter here!"
       />
       <Spacer height={24} />
+      <Subheading>Envelope Colour</Subheading>
+      <EnvelopeColourWrapper>
+        {ENVELOPE_COLOURS.map((colour) => (
+          <ColourSelect
+            fill={colour.fill}
+            stroke={colour.stroke}
+            onClick={() =>
+              setEnvelopeColour({ fill: colour.fill, stroke: colour.stroke })
+            }
+            selected={envelopeColour.fill === colour.fill}
+          />
+        ))}
+      </EnvelopeColourWrapper>
+      <Spacer height={24} />
       <Button onClick={() => handleSubmit()} disabled={message.length < 1}>
         Send my letter!
       </Button>
@@ -49,6 +73,16 @@ const Section = styled.div`
 
 const Heading = styled.h1`
   margin: 0;
+`;
+
+const Subheading = styled.h2`
+  margin: 0;
+`;
+
+const EnvelopeColourWrapper = styled.div`
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
 `;
 
 export default Landing;

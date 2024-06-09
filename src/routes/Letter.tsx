@@ -10,8 +10,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Note } from "../assets";
 import styled, { keyframes } from "styled-components";
 import Button from "../components/Button";
-import { theme } from "../theme";
 import Spacer from "../components/Spacer";
+import Envelope from "../components/Envelope";
 
 const Letter = () => {
   const db = getFirestore();
@@ -42,10 +42,15 @@ const Letter = () => {
       <LetterHeading>You&apos;ve received a letter!</LetterHeading>
       <Spacer height={24} />
       {letter && (
-        <NoteWrapper>
-          <NoteImg src={Note} />
-          <Message>{letter.message}</Message>
-        </NoteWrapper>
+        <>
+          <EnvelopeWrapper>
+            <Envelope fill={letter.fill} stroke={letter.stroke} />
+          </EnvelopeWrapper>
+          <NoteWrapper>
+            <NoteImg src={Note} />
+            <Message>{letter.message}</Message>
+          </NoteWrapper>
+        </>
       )}
       <Spacer height={24} />
       <Button onClick={() => navigate("/")}>
@@ -59,6 +64,10 @@ const Section = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const EnvelopeWrapper = styled.div`
+  position: absolute;
 `;
 
 const fadeInHorizontal = keyframes`
