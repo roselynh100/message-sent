@@ -66,8 +66,31 @@ const Section = styled.div`
   align-items: center;
 `;
 
+const scaleUpFade = keyframes`
+  0% {
+    opacity: 0;
+    scale: 0.5;
+  }
+  100% {
+    opacity: 1;
+    scale: 1
+  }
+`;
+
+const fadeOut = keyframes`
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+`;
+
 const EnvelopeWrapper = styled.div`
-  position: absolute;
+  position: relative;
+  z-index: 10;
+  animation: ${scaleUpFade} 1s forwards, ${fadeOut} 1s forwards;
+  animation-delay: 0s, 2s;
 `;
 
 const fadeInHorizontal = keyframes`
@@ -107,6 +130,7 @@ const floatUpAnimation = keyframes`
 
   100% {
     opacity: 1;
+    transform: translateY(0);
   }
 `;
 
@@ -114,7 +138,10 @@ const NoteWrapper = styled.div`
   display: grid;
   grid-template: 1fr;
   width: min(50vw, 60vh);
-  animation: ${floatUpAnimation} 1.5s ease;
+  opacity: 0;
+  transform: translateY(20vh);
+  animation: ${floatUpAnimation} 1.5s forwards;
+  animation-delay: 2s;
 `;
 
 const NoteImg = styled.img`
