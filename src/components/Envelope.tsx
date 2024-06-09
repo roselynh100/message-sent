@@ -8,7 +8,7 @@ type EnvelopeProps = {
 const Envelope: React.FC<EnvelopeProps> = ({ fill, stroke }) => {
   return (
     <svg
-      width="max(45%, 450px)"
+      width="100%"
       viewBox="0 0 259 189"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

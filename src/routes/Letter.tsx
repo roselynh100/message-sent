@@ -42,7 +42,7 @@ const Letter = () => {
       <LetterHeading>You&apos;ve received a letter!</LetterHeading>
       <Spacer height={24} />
       {letter && (
-        <>
+        <AnimationWrapper>
           <EnvelopeWrapper>
             <Envelope fill={letter.fill} stroke={letter.stroke} />
           </EnvelopeWrapper>
@@ -50,7 +50,7 @@ const Letter = () => {
             <NoteImg src={Note} />
             <Message>{letter.message}</Message>
           </NoteWrapper>
-        </>
+        </AnimationWrapper>
       )}
       <Spacer height={24} />
       <Button onClick={() => navigate("/")}>
@@ -64,6 +64,11 @@ const Section = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const AnimationWrapper = styled.div`
+  display: grid;
+  grid-template: 1fr;
 `;
 
 const scaleUpFade = keyframes`
@@ -87,6 +92,7 @@ const fadeOut = keyframes`
 `;
 
 const EnvelopeWrapper = styled.div`
+  grid-area: 1/1;
   position: relative;
   z-index: 10;
   animation: ${scaleUpFade} 1s forwards, ${fadeOut} 1s forwards;
@@ -135,13 +141,14 @@ const floatUpAnimation = keyframes`
 `;
 
 const NoteWrapper = styled.div`
+  grid-area: 1/1;
   display: grid;
   grid-template: 1fr;
   width: min(50vw, 60vh);
   opacity: 0;
   transform: translateY(20vh);
   animation: ${floatUpAnimation} 1.5s forwards;
-  animation-delay: 2s;
+  animation-delay: 2.5s;
 `;
 
 const NoteImg = styled.img`
