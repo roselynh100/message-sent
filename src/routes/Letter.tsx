@@ -12,6 +12,7 @@ import styled, { keyframes } from "styled-components";
 import Button from "../components/Button";
 import Spacer from "../components/Spacer";
 import Envelope from "../components/Envelope";
+import { useClipboard } from "use-clipboard-copy";
 
 const Letter = () => {
   const db = getFirestore();
@@ -20,6 +21,7 @@ const Letter = () => {
 
   const [letter, setLetter] = useState<any>();
   const navigate = useNavigate();
+  const clipboard = useClipboard();
 
   useEffect(() => {
     async function fetchData() {
@@ -53,9 +55,15 @@ const Letter = () => {
         </AnimationWrapper>
       )}
       <Spacer height={24} />
-      <Button onClick={() => navigate("/")}>
-        Want to write your own letter?
-      </Button>
+      <ButtonGroup>
+        <Button onClick={() => clipboard.copy(window.location.href)}>
+          Share this letter!
+        </Button>
+        <Spacer height={12} />
+        <Button onClick={() => navigate("/")}>
+          Or write a(nother) letter!
+        </Button>
+      </ButtonGroup>
     </Section>
   );
 };
@@ -162,6 +170,21 @@ const Message = styled.p`
   margin: 24px;
   font-size: 18px;
   white-space: pre-line;
+`;
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0
+  }
+  100% {
+    opacity: 1
+  }
+`;
+
+const ButtonGroup = styled.div`
+  opacity: 0;
+  animation: ${fadeIn} 1s forwards;
+  animation-delay: 4s;
 `;
 
 export default Letter;
