@@ -7,7 +7,7 @@ const StyledInput = styled.textarea`
   border: 3px solid ${THEME.colors.blue};
   padding: 18px;
   line-height: 26px;
-  font-family: Arial;
+  font-family: "Lato";
   font-size: 20px;
   resize: none;
   color: ${THEME.colors.grey};

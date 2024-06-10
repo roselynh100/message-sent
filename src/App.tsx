@@ -30,7 +30,7 @@ const Background = styled.div`
 `;
 
 const Wrapper = styled.div`
-  padding: 128px 64px;
+  padding: 72px 64px;
 `;
 
 export default App;
