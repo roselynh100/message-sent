@@ -45,8 +45,9 @@ const Landing = () => {
       />
       <Subheading>Envelope Colour</Subheading>
       <SelectWrapper>
-        {Object.keys(ENVELOPE_COLOURS).map((colour) => (
+        {Object.keys(ENVELOPE_COLOURS).map((colour, i) => (
           <RoundSelect
+            key={i}
             fill={ENVELOPE_COLOURS[colour].fill}
             stroke={ENVELOPE_COLOURS[colour].stroke}
             onClick={() => setEnvelopeColour(colour)}
@@ -56,8 +57,9 @@ const Landing = () => {
       </SelectWrapper>
       <Subheading>Letter Paper</Subheading>
       <SelectWrapper>
-        {Object.keys(LETTER_COLOURS).map((colour) => (
+        {Object.keys(LETTER_COLOURS).map((colour, i) => (
           <RoundSelect
+            key={i}
             fill={LETTER_COLOURS[colour].fill}
             stroke={LETTER_COLOURS[colour].stroke}
             onClick={() => setLetterPaper(colour)}

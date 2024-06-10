@@ -7,12 +7,13 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Note } from "../assets";
 import styled, { keyframes } from "styled-components";
 import Button from "../components/Button";
 import Spacer from "../components/Spacer";
 import Envelope from "../components/Envelope";
 import { useClipboard } from "use-clipboard-copy";
+import { ENVELOPE_COLOURS, LETTER_COLOURS } from "../constants";
+import Note from "../components/Note";
 
 const Letter = () => {
   const db = getFirestore();
@@ -46,11 +47,19 @@ const Letter = () => {
       {letter && (
         <AnimationWrapper>
           <EnvelopeWrapper>
-            <Envelope fill={letter.fill} stroke={letter.stroke} />
+            <Envelope
+              fill={ENVELOPE_COLOURS[letter.envelopeColour].fill}
+              stroke={ENVELOPE_COLOURS[letter.envelopeColour].stroke}
+            />
           </EnvelopeWrapper>
           <NoteWrapper>
-            <NoteImg src={Note} />
-            <Message>{letter.message}</Message>
+            <Note
+              fill={LETTER_COLOURS[letter.letterPaper].fill}
+              stroke={LETTER_COLOURS[letter.letterPaper].stroke}
+            />
+            <Message colour={LETTER_COLOURS[letter.letterPaper].text}>
+              {letter.message}
+            </Message>
           </NoteWrapper>
         </AnimationWrapper>
       )}
@@ -159,17 +168,17 @@ const NoteWrapper = styled.div`
   animation-delay: 2.5s;
 `;
 
-const NoteImg = styled.img`
-  grid-area: 1/1;
-  width: 100%;
-`;
+type MessageProps = {
+  colour: string;
+};
 
-const Message = styled.p`
+const Message = styled.p<MessageProps>`
   grid-area: 1/1;
   max-width: 100%;
   margin: 24px;
   font-family: "Coming Soon";
   font-size: 18px;
+  color: ${(props) => props.colour};
   white-space: pre-line;
 `;
 

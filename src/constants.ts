@@ -21,7 +21,7 @@ export const ENVELOPE_COLOURS: EnvelopeColoursProps = {
   pink: { fill: "#F49FBC", stroke: "#F07FA5" },
   green: { fill: "#C5E58A", stroke: "#ADDA58" },
   blue: { fill: "#7BDFF2", stroke: "#20C8E9" },
-  purple: { fill: "#AA8FB7", stroke: "#8E6AA0" },
+  purple: { fill: "#C08FE0", stroke: "#9960C0" },
 };
 
 type LetterColourProps = {
@@ -33,8 +33,8 @@ type LetterColourProps = {
 };
 
 export const LETTER_COLOURS: LetterColourProps = {
-  beige: { fill: "#FEE0AE", stroke: "#FEC872", text: THEME.colors.grey },
-  grey: { fill: "#E1E0E1", stroke: "#CDCBCD", text: THEME.colors.grey },
-  navy: { fill: "#2A3651", stroke: "#1C2436", text: THEME.colors.white },
-  green: { fill: "#2A4422", stroke: "#21361C", text: THEME.colors.white },
+  beige: { fill: "#FFEAC2", stroke: "#D2A24B", text: THEME.colors.grey },
+  grey: { fill: "#E1E0E1", stroke: "#AFACAF", text: THEME.colors.grey },
+  navy: { fill: "#313E5E", stroke: "#1C2436", text: THEME.colors.white },
+  green: { fill: "#39563B", stroke: "#293D2A", text: THEME.colors.white },
 };
