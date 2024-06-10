@@ -14,13 +14,22 @@ import Envelope from "../components/Envelope";
 import { useClipboard } from "use-clipboard-copy";
 import { ENVELOPE_COLOURS, LETTER_COLOURS } from "../constants";
 import Note from "../components/Note";
+import { Tooltip } from "react-tooltip";
+
+type DocumentData = {
+  messageId: string;
+  message: string;
+  envelopeColour: string;
+  letterPaper: string;
+};
 
 const Letter = () => {
   const db = getFirestore();
   const location = useLocation();
   const letterId = location.pathname.split("/")[1];
 
-  const [letter, setLetter] = useState<any>();
+  const [letter, setLetter] = useState<DocumentData | null>();
+  const [isTooltipOpen, setIsTooltipOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   const clipboard = useClipboard();
 
@@ -34,11 +43,18 @@ const Letter = () => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         console.log(doc.id, " => ", doc.data());
-        setLetter(doc.data());
+        setLetter(doc.data() as DocumentData);
       });
     }
     fetchData();
   }, []);
+
+  const triggerTooltip = () => {
+    setIsTooltipOpen(true);
+    setTimeout(() => {
+      setIsTooltipOpen(false);
+    }, 1000);
+  };
 
   return (
     <Section>
@@ -65,7 +81,20 @@ const Letter = () => {
       )}
       <Spacer height={24} />
       <ButtonGroup>
-        <Button onClick={() => clipboard.copy(window.location.href)}>
+        <StyledTooltip
+          anchorSelect=".share-button"
+          place="top"
+          isOpen={isTooltipOpen}
+        >
+          Copied! ❤
+        </StyledTooltip>
+        <Button
+          onClick={() => {
+            clipboard.copy(window.location.href);
+            triggerTooltip();
+          }}
+          className="share-button"
+        >
           Share this letter!
         </Button>
         <Spacer height={12} />
@@ -110,6 +139,7 @@ const fadeOut = keyframes`
 
 const EnvelopeWrapper = styled.div`
   grid-area: 1/1;
+  margin-top: 25%;
   position: relative;
   z-index: 10;
   animation: ${scaleUpFade} 1s forwards, ${fadeOut} 1s forwards;
@@ -140,6 +170,7 @@ const LetterHeading = styled.h1`
   padding: 0 32px;
   cursor: default;
   color: white;
+  text-align: center;
   text-shadow: black 1px 0 10px;
   animation: ${fadeInHorizontal} 1.5s ease-in-out;
   -webkit-mask-repeat: no-repeat;
@@ -195,6 +226,12 @@ const ButtonGroup = styled.div`
   opacity: 0;
   animation: ${fadeIn} 1s forwards;
   animation-delay: 4s;
+`;
+
+const StyledTooltip = styled(Tooltip)`
+  font-family: "Lato";
+  font-size: 18px !important;
+  padding: 12px !important;
 `;
 
 export default Letter;

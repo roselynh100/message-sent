@@ -6,13 +6,20 @@ type ButtonProps = {
   onClick: () => void;
   disabled?: boolean;
   children: ReactNode;
+  className?: string;
 };
 
-const Button: React.FC<ButtonProps> = ({ onClick, disabled, children }) => {
+const Button: React.FC<ButtonProps> = ({
+  onClick,
+  disabled,
+  children,
+  className,
+}) => {
   return (
     <ButtonWrapper
       onClick={onClick}
       disabled={disabled !== undefined ? disabled : false}
+      className={className ?? ""}
     >
       <StyledText>{children}</StyledText>
     </ButtonWrapper>
