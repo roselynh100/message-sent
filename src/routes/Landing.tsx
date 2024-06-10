@@ -6,8 +6,8 @@ import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Spacer from "../components/Spacer";
-import ColourSelect from "../components/ColourSelect";
-import { ENVELOPE_COLOURS } from "../constants";
+import { ENVELOPE_COLOURS, LETTER_COLOURS } from "../constants";
+import RoundSelect from "../components/RoundSelect";
 
 const Landing = () => {
   const db = getFirestore();
@@ -17,6 +17,11 @@ const Landing = () => {
     fill: string;
     stroke: string;
   }>({ fill: "", stroke: "" });
+  const [letterPaper, setLetterPaper] = useState<{
+    fill: string;
+    stroke: string;
+    text: string;
+  }>({ fill: "", stroke: "", text: "" });
 
   const navigate = useNavigate();
 
@@ -46,9 +51,9 @@ const Landing = () => {
       />
       <Spacer height={24} />
       <Subheading>Envelope Colour</Subheading>
-      <EnvelopeColourWrapper>
+      <SelectWrapper>
         {ENVELOPE_COLOURS.map((colour) => (
-          <ColourSelect
+          <RoundSelect
             fill={colour.fill}
             stroke={colour.stroke}
             onClick={() =>
@@ -57,7 +62,24 @@ const Landing = () => {
             selected={envelopeColour.fill === colour.fill}
           />
         ))}
-      </EnvelopeColourWrapper>
+      </SelectWrapper>
+      <Subheading>Letter Paper</Subheading>
+      <SelectWrapper>
+        {LETTER_COLOURS.map((colour) => (
+          <RoundSelect
+            fill={colour.fill}
+            stroke={colour.stroke}
+            onClick={() =>
+              setLetterPaper({
+                fill: colour.fill,
+                stroke: colour.stroke,
+                text: colour.text,
+              })
+            }
+            selected={letterPaper.fill === letterPaper.fill}
+          />
+        ))}
+      </SelectWrapper>
       <Spacer height={24} />
       <Button onClick={() => handleSubmit()} disabled={message.length < 1}>
         Send my letter!
@@ -79,7 +101,7 @@ const Subheading = styled.h2`
   margin: 0;
 `;
 
-const EnvelopeColourWrapper = styled.div`
+const SelectWrapper = styled.div`
   display: flex;
   gap: 24px;
   flex-wrap: wrap;

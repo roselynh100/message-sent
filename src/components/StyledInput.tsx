@@ -1,20 +1,20 @@
 import styled from "styled-components";
-import { theme } from "../theme";
+import { THEME } from "../constants";
 
 const StyledInput = styled.textarea`
   width: 60%;
   border-radius: 8px;
-  border: 3px solid ${theme.colors.blue};
+  border: 3px solid ${THEME.colors.blue};
   padding: 18px;
   line-height: 26px;
   font-family: Arial;
   font-size: 20px;
   resize: none;
-  color: ${theme.colors.grey};
+  color: ${THEME.colors.grey};
 
   &:focus {
     outline: none !important;
-    border-color: ${theme.colors.yellow};
+    border-color: ${THEME.colors.yellow};
   }
 `;
 

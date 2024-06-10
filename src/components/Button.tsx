@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { theme } from "../theme";
 import { ReactNode } from "react";
+import { THEME } from "../constants";
 
 type ButtonProps = {
   onClick: () => void;
@@ -21,13 +21,13 @@ const Button: React.FC<ButtonProps> = ({ onClick, disabled, children }) => {
 
 const ButtonWrapper = styled.button`
   border-radius: 12px;
-  border: 3px solid ${theme.colors.darkPink};
+  border: 3px solid ${THEME.colors.darkPink};
   background: linear-gradient(
     to right,
-    ${theme.colors.pink},
-    ${theme.colors.yellow}
+    ${THEME.colors.pink},
+    ${THEME.colors.yellow}
   );
-  color: ${theme.colors.grey};
+  color: ${THEME.colors.grey};
   padding: 18px;
   font-size: 16px;
   transition: all 250ms;
@@ -36,15 +36,15 @@ const ButtonWrapper = styled.button`
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 6px 6px ${theme.colors.darkPink};
-    color: ${theme.colors.grey}CC;
+    box-shadow: 6px 6px ${THEME.colors.darkPink};
+    color: ${THEME.colors.grey}CC;
   }
 
   &:disabled {
     cursor: not-allowed;
     transform: translateY(0);
     box-shadow: 0 0;
-    color: ${theme.colors.grey};
+    color: ${THEME.colors.grey};
     opacity: 0.8;
   }
 `;

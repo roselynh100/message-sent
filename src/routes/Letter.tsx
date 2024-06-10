@@ -168,6 +168,7 @@ const Message = styled.p`
   grid-area: 1/1;
   max-width: 100%;
   margin: 24px;
+  font-family: "Coming Soon";
   font-size: 18px;
   white-space: pre-line;
 `;

@@ -1,27 +1,27 @@
 import styled from "styled-components";
 import { Check } from "../assets";
 
-type ColourSelectProps = {
+type RoundSelectProps = {
   fill: string;
   stroke: string;
   onClick: () => void;
   selected: boolean;
 };
 
-const ColourSelect: React.FC<ColourSelectProps> = ({
+const RoundSelect: React.FC<RoundSelectProps> = ({
   fill,
   stroke,
   onClick,
   selected,
 }) => {
   return (
-    <ColourCircle fill={fill} stroke={stroke} onClick={onClick}>
+    <Circle fill={fill} stroke={stroke} onClick={onClick}>
       {selected && <Checkmark src={Check} alt="checkmark" />}
-    </ColourCircle>
+    </Circle>
   );
 };
 
-const ColourCircle = styled.div<{ fill: string; stroke: string }>`
+const Circle = styled.div<{ fill: string; stroke: string }>`
   background-color: ${(props) => props.fill};
   border: 3px solid ${(props) => props.stroke};
   height: 100px;
@@ -41,4 +41,4 @@ const Checkmark = styled.img`
   width: 60px;
 `;
 
-export default ColourSelect;
+export default RoundSelect;
